@@ -1,3 +1,5 @@
+// jim'll fix it
+
 var height = "innerHeight" in window 
                ? window.innerHeight
                : document.documentElement.offsetHeight; 
