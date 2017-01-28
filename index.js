@@ -1,5 +1,6 @@
-CountDownTimerHour('01/29/2017 13:00:00', 'hour');
-CountDownTimerMin('01/29/2017 13:00:00', 'min');
+var height = "innerHeight" in window 
+               ? window.innerHeight
+               : document.documentElement.offsetHeight; 
 
 function CountDownTimerHour(dt, id)
 {
@@ -27,6 +28,8 @@ function CountDownTimerHour(dt, id)
         var seconds = Math.floor((distance % _minute) / _second);
         document.getElementById(id).innerHTML = "";
         document.getElementById(id).innerHTML += hours + 'hrs ';
+        document.getElementById(id).style.top = Math.floor((Math.random() * height)) - document.getElementById(id).clientHeight/2 + "px"; 
+        document.getElementById(id).style.transform = "rotate("+Math.floor((Math.random() * 10)-10)+"deg)";
     }
 
     timer = setInterval(showRemaining, 1000);
