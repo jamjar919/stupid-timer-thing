@@ -43,7 +43,8 @@ function CountDownTimerMin(dt, id)
     var _hour = _minute * 60;
     var _day = _hour * 24;
     var timer;
-
+    lastTen = 0;
+    lastMinutes = 0;
     function showRemaining() {
         var now = new Date();
         var distance = end - now;
@@ -59,8 +60,22 @@ function CountDownTimerMin(dt, id)
         var minutes = Math.floor((distance % _hour) / _minute);
         var seconds = Math.floor((distance % _minute) / _second);
         document.getElementById(id).innerHTML = "";
-        document.getElementById(id).innerHTML += minutes + 'mins ';
-        document.getElementById(id).innerHTML += seconds + 'secs';
+        if (minutes != lastMinutes) {
+            document.getElementById(id).innerHTML += "<span class=\"highlight\">"+minutes+"</span>";
+        } else {
+            document.getElementById(id).innerHTML += minutes;
+        }
+        lastMinutes = minutes;
+        document.getElementById(id).innerHTML += 'min <br>';
+        if (lastTen != Math.floor((seconds-1)/10)) {
+            lastTen = Math.floor(seconds/10);
+            document.getElementById(id).innerHTML += "<span class=\"highlight\">"+seconds+"</span>";
+        } else if (seconds > 9) {
+            document.getElementById(id).innerHTML += seconds.toString()[0]+"<span class=\"highlight\">"+seconds.toString()[1]+"</span>";
+        } else {
+            document.getElementById(id).innerHTML += "<span class=\"highlight\">"+seconds+"</span>";
+        }
+        document.getElementById(id).innerHTML += ' sec';
     }
 
     timer = setInterval(showRemaining, 1000);
